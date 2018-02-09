@@ -66,6 +66,22 @@ mongo_stream_in <- function(cur, handler = NULL, pagesize = 1000, verbose = TRUE
   }
 }
 
+
+ndjson <- function(cur){
+  count <- 0;
+  pagesize <- 100
+  res <- character(0)
+  repeat {
+    page <- mongo_cursor_next_json(cur, n = pagesize)
+    size <- length(page)
+    res <- c(res, page)
+    count <- count + size;
+    if(length(page) < pagesize)
+    break
+  }
+  return(res)
+}
+
 post_process <- function(x){
   df <- as.data.frame(jsonlite:::simplify(x))
   #idcol <- match("_id", names(df))
