@@ -12,3 +12,7 @@ src/Makevars
 src/Makevars.bak
 inst/doc
 windows
+.Rapp.history
+.DS_Store
+
+.idea/
